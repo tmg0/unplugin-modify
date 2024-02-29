@@ -46,7 +46,7 @@ export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplaceTarget[]>
       const s = new MagicString(code)
 
       options.targets?.forEach(({ from, to }) => {
-        s.replaceAll(from, to)
+        s.replace(from, to)
       })
 
       if (!s.hasChanged())
