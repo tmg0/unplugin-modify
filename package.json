@@ -1,0 +1,40 @@
+{
+  "name": "unplugin-replace",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Replace target strings in files while bundling.",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zekunjin/unplugin-replace.git"
+  },
+  "keywords": [
+    "unplugin",
+    "replace",
+    "esbuild",
+    "rollup"
+  ],
+  "author": "zekun.jin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zekunjin/unplugin-replace/issues"
+  },
+  "homepage": "https://github.com/zekunjin/unplugin-replace#readme",
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "unplugin": "^1.7.1",
+    "vitest": "^1.3.1"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^5.1.0",
+    "magic-string": "^0.30.7"
+  }
+}
