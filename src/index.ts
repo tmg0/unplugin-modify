@@ -3,7 +3,7 @@ import type { FilterPattern } from '@rollup/pluginutils'
 import { createFilter } from '@rollup/pluginutils'
 import MagicString from 'magic-string'
 
-export interface ReplaceTarget {
+export interface ReplacePatterns {
   from: string | RegExp
   to: string
 }
@@ -11,20 +11,21 @@ export interface ReplaceTarget {
 export interface UnpluginReplaceOptions {
   include: FilterPattern
   exclude: FilterPattern
-  targets: ReplaceTarget[]
+  patterns: ReplacePatterns[]
 }
 
 export const defaultIncludes = [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/]
 export const defaultExcludes = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
 
 const toArray = <T>(x: T | T[] | undefined | null): T[] => x == null ? [] : Array.isArray(x) ? x : [x]
+const isString = (x: any): x is string => typeof x === 'string'
 
-export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplaceTarget[]>((options = {}) => {
+export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplacePatterns[]>((options = {}) => {
   if (Array.isArray(options))
-    options = { targets: options }
+    options = { patterns: options }
 
-  if (!options.targets)
-    options.targets = []
+  if (!options.patterns)
+    options.patterns = []
 
   const filter = createFilter(
     toArray(options.include as string[] || []).length
@@ -45,7 +46,9 @@ export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplaceTarget[]>
 
       const s = new MagicString(code)
 
-      options.targets?.forEach(({ from, to }) => {
+      options.patterns?.forEach(({ from, to }) => {
+        if (isString(from))
+          from = new RegExp(from, 'g')
         s.replace(from, to)
       })
 
