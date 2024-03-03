@@ -3,15 +3,15 @@ import type { FilterPattern } from '@rollup/pluginutils'
 import { createFilter } from '@rollup/pluginutils'
 import MagicString from 'magic-string'
 
-export interface ReplacePatterns {
+export interface ModifyPatterns {
   from: string | RegExp
   to: string
 }
 
-export interface UnpluginReplaceOptions {
+export interface UnpluginModifyOptions {
   include: FilterPattern
   exclude: FilterPattern
-  patterns: ReplacePatterns[]
+  patterns: ModifyPatterns[]
 }
 
 export const defaultIncludes = [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/]
@@ -20,7 +20,7 @@ export const defaultExcludes = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
 const toArray = <T>(x: T | T[] | undefined | null): T[] => x == null ? [] : Array.isArray(x) ? x : [x]
 const isString = (x: any): x is string => typeof x === 'string'
 
-export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplacePatterns[]>((options = {}) => {
+export default createUnplugin<Partial<UnpluginModifyOptions> | ModifyPatterns[]>((options = {}) => {
   if (Array.isArray(options))
     options = { patterns: options }
 
@@ -35,7 +35,7 @@ export default createUnplugin<Partial<UnpluginReplaceOptions> | ReplacePatterns[
   )
 
   return {
-    name: 'replace',
+    name: 'modify',
     enforce: 'post',
     transformInclude(id) {
       return filter(id)
