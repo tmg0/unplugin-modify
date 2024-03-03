@@ -1,21 +1,22 @@
 {
   "name": "unplugin-modify",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Replace target strings in files while bundling.",
   "author": "zekun.jin",
   "license": "ISC",
-  "homepage": "https://github.com/zekunjin/unplugin-replace#readme",
+  "homepage": "https://github.com/zekunjin/unplugin-modify#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zekunjin/unplugin-replace.git"
+    "url": "git+https://github.com/zekunjin/unplugin-modify.git"
   },
   "bugs": {
-    "url": "https://github.com/zekunjin/unplugin-replace/issues"
+    "url": "https://github.com/zekunjin/unplugin-modify/issues"
   },
   "keywords": [
     "unplugin",
     "replace",
+    "modify",
     "esbuild",
     "rollup"
   ],
